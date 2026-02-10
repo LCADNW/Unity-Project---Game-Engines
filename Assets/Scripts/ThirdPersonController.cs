@@ -71,11 +71,14 @@ public class ThirdPersonController : MonoBehaviour
         //instantiaze the Rigidbody and the Animator
         body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+      
     }
 
     private void Update()
     {
         GroundedCheck();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void LateUpdate()
