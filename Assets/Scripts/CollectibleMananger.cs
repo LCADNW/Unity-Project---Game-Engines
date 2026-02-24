@@ -65,6 +65,20 @@ type, int amount)
         CollectibleEventSystem.RaiseCollectiblesUpdated();
     }
 
+    public void ResetCollectibles()
+    {
+        foreach (CollectibleType type in
+        System.Enum.GetValues(typeof(CollectibleType)))
+        {
+            collectibles[type] = 0;
+        }
+        // Notify UI to refresh
+        CollectibleEventSystem.RaiseCollectiblesUpdated();
+        Debug.Log("Collectibles reset.");
+    }
+
+
+
 }
 
 
