@@ -51,4 +51,8 @@ public class GameManager : MonoBehaviour
         nextSceneName = "Main Menu";
     }
 
+    public void WinGame()
+    {
+        SceneManager.LoadScene("WinScene");
+    }
 }

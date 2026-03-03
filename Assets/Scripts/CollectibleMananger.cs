@@ -61,6 +61,16 @@ type, int amount)
         collectibles[type] += amount;
         Debug.Log($"{type}: {collectibles[type]}");
 
+
+ //Win Condition
+        if (type == CollectibleType.Trophy && collectibles[type] >= 3)
+        {
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.WinGame();
+            }
+        }
+
         // Notify UI AFTER updating totals
         CollectibleEventSystem.RaiseCollectiblesUpdated();
     }
