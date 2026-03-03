@@ -1,26 +1,12 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
     //setting scene names?
     public string nextSceneName;
-    [SerializeField]
-    private string
-   mainMenuSceneName = "Main Menu";
-    [SerializeField]
-    private string
-    resetSceneName = "Reset";
-    [SerializeField]
-    private string
-   gameplaySceneName = "Gameplay";
-    [SerializeField]
-    private string
-  carCrashSceneName = "Reset1";
-
+ 
     void Awake()
     {
         //if the GameManager isn't existing, load it in.
@@ -34,26 +20,35 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-    
+
     }
 
     public void LoadGame()
     {
+        nextSceneName = ("Gameplay");   // SET FIRST
+        SceneManager.LoadScene("Reset");     // LOAD SECOND
 
-        SceneManager.LoadScene(resetSceneName);
-        nextSceneName = gameplaySceneName;
-            }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     public void ReturnToMenu()
     {
-        // Reset totals before leaving gameplay
         if (CollectibleManager.Instance != null)
         {
-            CollectibleManager.Instance.ResetCollectibles()
-            ;
+            CollectibleManager.Instance.ResetCollectibles();
         }
-        SceneManager.LoadScene("Reset1");
-        nextSceneName = "Main Menu";
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
+
+
+
+
+
+
+        nextSceneName = ("Main Menu");   // SET FIRST
+        SceneManager.LoadScene("Reset1");    // LOAD SECOND
     }
 
     public void WinGame()

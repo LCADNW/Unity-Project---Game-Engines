@@ -77,8 +77,22 @@ public class ThirdPersonController : MonoBehaviour
     private void Update()
     {
         GroundedCheck();
+    }
+
+    private void OnEnable()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        animator.ResetTrigger(jumpParamName);
+        animator.SetBool(fallingParamName, false);
+        animator.SetBool(groundedParamName, true);
+    }
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void LateUpdate()
@@ -142,16 +156,15 @@ public class ThirdPersonController : MonoBehaviour
         animator.SetTrigger(jumpParamName);
     }
 
-   //Co-routine that allows for a delay of the isGrounded state. Co-routines allow you to set delays for code execution.
+    //Co-routine that allows for a delay of the isGrounded state. Co-routines allow you to set delays for code execution.
     private IEnumerator JumpDowntimeCoroutine()
     {
-       //delay for player to be off the ground after co-routine starts
         yield return new WaitForSeconds(0.25f);
 
-        //waits until state "IsGrounded" to be true, then waits for the jumpDowntime (which is 1f) and then makes it
-        //so you can jump again
-        var waitForGrounded = new WaitUntil(() => isGrounded);
+        yield return new WaitUntil(() => isGrounded);
+
         yield return new WaitForSeconds(jumpDowntime);
+
         canJump = true;
     }
 

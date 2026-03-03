@@ -20,7 +20,10 @@ public class ResetSceneController : MonoBehaviour
         yield return new
        WaitForSeconds(delayBeforeLoad); //setting WaitForSeconds to value so it's changable later
 
+        yield return null;
+
         SceneManager.LoadScene(GameManager.instance.nextSceneName); //load next scene after (Gameplay) if I ordered it correctly lol
+        Debug.Log("Next Scene: " + GameManager.instance.nextSceneName);
     }
     IEnumerator FadeIn()
     {
