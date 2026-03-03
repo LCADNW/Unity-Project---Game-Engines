@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string
    gameplaySceneName = "Gameplay";
+    [SerializeField]
+    private string
+  carCrashSceneName = "Reset1";
 
     void Awake()
     {
@@ -30,6 +33,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    
     }
 
     public void LoadGame()
@@ -47,7 +52,7 @@ public class GameManager : MonoBehaviour
             CollectibleManager.Instance.ResetCollectibles()
             ;
         }
-        SceneManager.LoadScene("Reset");
+        SceneManager.LoadScene("Reset1");
         nextSceneName = "Main Menu";
     }
 
